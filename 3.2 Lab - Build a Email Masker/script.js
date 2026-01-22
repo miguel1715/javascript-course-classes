@@ -4,7 +4,8 @@ function maskEmail(email) {
   let atPosition = email.indexOf("@");
   let username = email.slice(1, atPosition - 1);
   let masking = email.replace(username, "*".repeat(atPosition - 2));
-  console.log(masking)
+  return masking;
 }
 
-maskEmail(email)
+console.log(maskEmail(email));
+
