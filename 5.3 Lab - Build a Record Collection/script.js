@@ -18,4 +18,19 @@ const recordCollection = {
   }
 };
 
+function updateRecords(records, id, prop, value) {
+  if (value === "") {
+    delete records[id][prop];
+  }
+  if (prop !== "tracks" && value !== "") {
+    records[id][prop] = value;
+  }
+  if (prop === "tracks" && value !== "" && records[id].tracks === undefined) {
+    records[id].tracks = [];
+    records[id].tracks.push(value);
+  } else if (prop === "tracks" && value !== "") {
+    records[id].tracks.push(value)
+  }
+    return records
+}
 
