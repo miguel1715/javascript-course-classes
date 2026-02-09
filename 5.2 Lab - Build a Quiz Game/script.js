@@ -1,54 +1,50 @@
-
 const questions = [
   {
-    category: "Movies",
-    question: "Who is the actor who play the main role in the Mission Impossible movies?",
-    choices: ["Leonardo DiCaprio", "Tom Cruise", "Dwayne Johnson"],
-    answer: "Tom Cruise"
+    category: "Geography",
+    question: "What is the capital of Portugal?",
+    choices: ["Porto", "Lisbon", "Faro"],
+    answer: "Lisbon"
   },
   {
     category: "Science",
-    question: "What planet is known as the Red Planet?",
-    choices: ["Venus", "Mars", "Jupiter"],
-    answer: "Mars"
+    question: "What planet is closest to the Sun?",
+    choices: ["Venus", "Mercury", "Mars"],
+    answer: "Mercury"
   },
   {
-    category: "Geography",
-    question: "What is the capital city of Japan?",
-    choices: ["Kyoto", "Tokyo", "Osaka"],
-    answer: "Tokyo"
+    category: "Programming",
+    question: "What does HTML stand for?",
+    choices: ["Hyperlink Text Markup Language", "HyperText Markup Language", "Home Tool Markup Language"],
+    answer: "HyperText Markup Language"
   },
   {
-    category: "Sports",
-    question: "How many players are on a standard football team on the field?",
-    choices: ["9", "11", "13"],
-    answer: "11"
+    category: "Math",
+    question: "What is 7 x 8?",
+    choices: ["54", "56", "64"],
+    answer: "56"
   },
   {
     category: "History",
-    question: "In which year did World War II end?",
+    question: "In what year did World War II end?",
     choices: ["1943", "1945", "1947"],
     answer: "1945"
   }
-];
+]
 
-
-
-function getRandomQuestion(questions) {
-  let randomInt = Math.floor(Math.random() * questions.length);
-  return questions[randomInt]
+function getRandomQuestion(arr) {
+  let getRandom = Math.floor(Math.random() * arr.length);
+  return arr[getRandom]
 }
 
-function getRandomComputerChoice(choices) {
-  let randomAnswer = Math.floor(Math.random() * choices.length);
-  return choices[randomAnswer]
+function getRandomComputerChoice(choicesArr) {
+  let randomChoice = Math.floor(Math.random() * choicesArr.length);
+  return choicesArr[randomChoice]
 }
 
-function getResults(question, computerChoice) {
-  if (computerChoice === question.answer) {
+function getResults(mainQuestion, pcChoice) {
+  if (pcChoice === mainQuestion.answer) {
     return "The computer's choice is correct!"
   } else {
-    return `The computer's choice is wrong. The correct answer is: ${question.answer}`
+    return `The computer's choice is wrong. The correct answer is: ${mainQuestion.answer}`
   }
 }
-
