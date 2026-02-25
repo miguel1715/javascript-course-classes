@@ -14,6 +14,25 @@ The function should return an array containing the largest number from each sub-
 function largestOfAll(arr) {
   let result = [];
 
+  for(const subArray of arr) {
+    let max = subArray[0];
+
+    for (let i = 1; i < subArray.length; i++) {
+      if (subArray[i] > max) {
+        max = subArray[i];
+      }
+    }
+    result.push(max)
+  }
+  return result;
+}
+
+
+// 2nd possible solution
+
+function largestOfAll(arr) {
+  let result = [];
+
   for (let i = 0; i < arr.length; i++) {
     const subArray = arr[i];
     let max = subArray[0];
@@ -29,6 +48,3 @@ function largestOfAll(arr) {
 }
 
 
-/* largestOfAll([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [1000, 1001, 857, 1]]) 
-
-  should return [27, 5, 39, 1001]. */
