@@ -21,7 +21,7 @@ Your solution should not use the Array.prototype.flat() or Array.prototype.flatM
 Global variables should not be used.
 */
 
-
+// using for...of 
 function steamrollArray (nest) {
   let flatArr = [];
 
@@ -34,3 +34,23 @@ function steamrollArray (nest) {
   }
   return flatArr;
 }
+
+// using forEach ...
+function steamrollArray (nest) {
+  let flatArray = [];
+
+  nest.forEach((thing) => {
+    if (Array.isArray(thing) === true) {
+      flatArray = flatArray.concat(steamrollArray(thing));
+    } else {
+      flatArray.push(thing);
+    }
+  })
+  return flatArray;
+}
+
+//using reduce ...
+function steamrollArray(nest) {
+  return nest.reduce((flat, thing) => 
+  flat.concat(Array.isArray(thing) ? steamrollArray(thing) : thing), []);
+  }
