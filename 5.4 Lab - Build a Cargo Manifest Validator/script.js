@@ -48,11 +48,59 @@ Note: each of these two cases should have two console.log() calls.
 
 
 
-function normalizedUnits(manifest) {
-  const copy = {...manifest};
+function normalizeUnits(manifest) {
+  const copy = { ...manifest };
   if (copy.unit === "lb") {
     copy.weight = copy.weight * 0.45;
-    copy.unit = "kg"
+    copy.unit = "kg";
   }
-  return copy
-} 
+  return copy;
+}
+
+function validateManifest(manifest) {
+  const errors = {};
+
+  if (!manifest.hasOwnProperty("containerId")) {
+    errors.containerId = "Missing";
+  } else if (typeof manifest.containerId !== "number" || manifest.containerId <= 0 || !Number.isInteger(manifest.containerId)) {
+    errors.containerId = "Invalid";
+  }
+
+  if (!manifest.hasOwnProperty("destination")) {
+    errors.destination = "Missing";
+  } else if (typeof manifest.destination !== "string" || manifest.destination.trim() === "") {
+    errors.destination = "Invalid";
+  }
+
+  if (!manifest.hasOwnProperty("weight")) {
+    errors.weight = "Missing";
+  } else if (typeof manifest.weight !== "number" || manifest.weight <= 0 || Number.isNaN(manifest.weight)) {
+    errors.weight = "Invalid";
+  }
+
+  if (!manifest.hasOwnProperty("unit")) {
+    errors.unit = "Missing";
+  } else if (typeof manifest.unit !== "string" || manifest.unit !== "lb" && manifest.unit !== "kg") {
+    errors.unit = "Invalid";
+  }
+
+  if (!manifest.hasOwnProperty("hazmat")) {
+    errors.hazmat = "Missing";
+  } else if (typeof manifest.hazmat !== "boolean") {
+    errors.hazmat = "Invalid";
+  }
+  return errors
+}
+
+function processManifest(manifest) {
+  const errors = validateManifest(manifest);
+
+  if (Object.keys(errors).length === 0) {
+    console.log(`Validation success: ${manifest.containerId}`)
+    const normalized = normalizeUnits(manifest);
+    console.log(`Total weight: ${normalized.weight} kg`)
+  } else if (Object.keys(errors).length !== 0) {
+    console.log(`Validation error: ${manifest.containerId}`);
+    console.log(validateManifest(manifest));
+  }
+}
