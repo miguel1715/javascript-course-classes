@@ -1,2 +1,1 @@
-/*Step 1
-In this workshop, you will build a storytelling app that allows users to select a type of story and display a short story of that type. The CSS and the HTML boilerplate has been provided for you.*/
+const storyContainer = document.querySelector(".story-container")
