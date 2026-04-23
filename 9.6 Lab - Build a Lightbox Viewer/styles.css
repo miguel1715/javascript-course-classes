@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  font-family: Monospace, Fantasy, Sans-serif, Arial;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  background-color: aliceblue;
+  color: midnightblue;
+}
+
+h1 {
+  margin: 64px;
+  padding: 64px;
+  display: flex;
+  justify-content: center;
+}
+
+.gallery {
+  width: 85%;
+  max-width: 500px;
+}
