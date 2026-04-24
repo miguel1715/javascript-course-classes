@@ -10,18 +10,39 @@ body {
   min-height: 100vh;
   width: 100%;
   margin: 0;
-  background-color: aliceblue;
-  color: midnightblue;
+  background-color: darkslategrey;
+  color: linen;
+}
+
+.main-div {
+  width: 100%;
+  padding: 64px;
 }
 
 h1 {
-  margin: 64px;
-  padding: 64px;
+  margin-bottom: 8rem;
+  text-align: center;
   display: flex;
   justify-content: center;
 }
 
 .gallery {
-  width: 85%;
-  max-width: 500px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  gap: 50px;
+  padding: 24px;
+  margin: 0 auto;
+  max-width: 70rem;
+}
+
+.gallery-item {
+  width: 100%;
+  height: 300px;
+  max-width: 800px;
+  max-height: 500px;
+  cursor: pointer;
+  border-radius: 8px;
+  object-position: center top;
+  object-fit: cover;
 }
