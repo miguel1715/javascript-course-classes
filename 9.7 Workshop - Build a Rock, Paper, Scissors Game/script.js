@@ -13,3 +13,10 @@ function hasPlayerWonTheRound(playerChoice, computerChoice) {
   );
 }
 
+let playerScore = 0;
+let computerScore = 0;
+
+function getRoundResults(userOption) {
+  const computerResult = getRandomComputerResult();
+ 
+}
