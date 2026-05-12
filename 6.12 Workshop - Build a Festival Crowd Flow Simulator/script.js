@@ -12,3 +12,10 @@ const nightGates = [
   { id: "West", capacity: 3, queue: [5, 2, 1, 4] },
 ];
 
+function initializeThroughput(gates) {
+  const summary = {};
+  for (let i = 0; i < gates.length; i++){
+    summary[gates[i].id] = 0;
+  }
+  return summary;
+}
