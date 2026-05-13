@@ -81,5 +81,8 @@ function simulateFestival(gates, timeBlock) {
     }
     tickIndex++;
   }
-
+  printSummary(throughputSummary);
 }
+
+simulateFestival(morningGates, "Morning");
+simulateFestival(nightGates, "Night");
