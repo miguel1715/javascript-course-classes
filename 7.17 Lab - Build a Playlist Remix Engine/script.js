@@ -39,3 +39,9 @@ const playlists = [
     }
   ]
 ];
+
+function flattenPlaylists(arr) {
+  if (!Array.isArray(arr)) {
+    return []
+  }
+}
