@@ -54,3 +54,11 @@ function flattenPlaylists(arr) {
   }
   return result
 }
+
+function scoreTracks(arr) {
+
+}
+
+function dedupeTracks(arr) {
+  
+}
