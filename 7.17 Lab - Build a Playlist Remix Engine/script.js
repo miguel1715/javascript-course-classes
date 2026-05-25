@@ -62,3 +62,15 @@ function scoreTracks(arr) {
 function dedupeTracks(arr) {
   
 }
+
+function enforceArtistQuota(arr) {
+
+}
+
+function buildSchedule(arr) {
+
+}
+
+function remixPlaylist(arr) {
+  
+}
