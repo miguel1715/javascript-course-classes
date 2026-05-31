@@ -73,6 +73,6 @@ function buildSchedule(arr) {
 
 }
 
-function remixPlaylist(arr) {
+function remixPlaylist(arr, maxNumb) {
   
 }
