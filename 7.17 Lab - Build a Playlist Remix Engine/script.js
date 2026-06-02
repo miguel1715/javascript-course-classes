@@ -56,9 +56,9 @@ function flattenPlaylists(arr) {
 }
 
 function scoreTracks(arr) {
- for (let i = 0; i < arr.length; i++) {
+  return arr.map((track) => {
   
- }
+  });
 }
 
 function dedupeTracks(arr) {
