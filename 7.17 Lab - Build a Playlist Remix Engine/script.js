@@ -57,7 +57,7 @@ function flattenPlaylists(arr) {
 
 function scoreTracks(arr) {
   return arr.map((track) => {
-  
+      track["score"] = votes * 10 - Math.abs(bpm - 120);
   });
 }
 
