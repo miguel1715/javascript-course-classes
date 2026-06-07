@@ -57,7 +57,7 @@ function flattenPlaylists(arr) {
 
 function scoreTracks(arr) {
   return arr.map((track) => {
-      track["score"] = votes * 10 - Math.abs(bpm - 120);
+    return {...track, score: track.votes * 10 - Math.abs(track.bpm - 120)}
   });
 }
 
@@ -74,7 +74,5 @@ function buildSchedule(arr) {
 }
 
 function remixPlaylist(arr, maxNumb) {
-  for (let i = 0; i< arr.length; i++) {
-    
-  }
+ 
 }
