@@ -62,7 +62,16 @@ function scoreTracks(arr) {
 }
 
 function dedupeTracks(arr) {
-  
+  const seen = {};
+
+  return arr.filter((track) => {
+    if (!seen.hasOwnProperty(track.trackId)) {
+      seen[track.trackId] = true;
+      return true;
+    }  else {
+      return false;
+    }
+  })
 }
 
 function enforceArtistQuota(arr) {
