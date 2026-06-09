@@ -74,8 +74,12 @@ function dedupeTracks(arr) {
   })
 }
 
-function enforceArtistQuota(arr) {
+function enforceArtistQuota(arr, nmb) {
+  const count = {};
 
+  return arr.filter((track) => {
+    
+  })
 }
 
 function buildSchedule(arr) {
