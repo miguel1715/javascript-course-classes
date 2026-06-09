@@ -78,7 +78,15 @@ function enforceArtistQuota(arr, nmb) {
   const count = {};
 
   return arr.filter((track) => {
-    
+    if (!count.hasOwnProperty(track.artist)) {
+      count[track.artist] = 1;
+      return true;
+    } else if (count.hasOwnProperty(track.artist) && count[track.artist] < nmb) {
+      count[track.artist] += 1;
+      return true;
+    } else {
+      return false;
+    }
   })
 }
 
