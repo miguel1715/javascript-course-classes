@@ -92,6 +92,9 @@ function enforceArtistQuota(arr, nmb) {
 
 function buildSchedule(arr) {
 
+  return arr.map((track, index) => {
+    return { slot: index + 1, trackId: track.trackId};
+  })
 }
 
 function remixPlaylist(arr, maxNumb) {
