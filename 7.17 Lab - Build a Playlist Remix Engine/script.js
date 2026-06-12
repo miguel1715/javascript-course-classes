@@ -98,5 +98,7 @@ function buildSchedule(arr) {
 }
 
 function remixPlaylist(arr, maxNumb) {
- 
+  for (let i = 0; i < arr.lenght; i++) {
+    
+  }
 }
