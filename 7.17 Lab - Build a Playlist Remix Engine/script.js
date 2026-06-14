@@ -98,13 +98,11 @@ function buildSchedule(arr) {
 }
 
 function remixPlaylist(arr, maxNumb) {
- for (let i = 0; i < cars.length; i++) {
-  text += cars[i] + "<br>";
-  text += cars[0] + "<br>";
-  text += cars[1] + "<br>";
-  text += cars[2] + "<br>";
-  text += cars[3] + "<br>";
-  text += cars[4] + "<br>";
-  text += cars[5] + "<br>";
-}
+  const function1 = flattenPlaylists(arr);
+  const function2 = scoreTracks(function1);
+  const function3 = dedupeTracks(function2);
+  const function4 = enforceArtistQuota(function3, maxNumb);
+  const function5 = buildSchedule(function4);
+
+  return function5;
 }
