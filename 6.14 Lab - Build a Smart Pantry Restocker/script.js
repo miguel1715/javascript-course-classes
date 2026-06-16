@@ -6,10 +6,14 @@ const rawData = [
 
 function parseShipment(rawData) {
   const result = [];
-  
+  const seen = {};
+
   for (let i = 0; i < rawData.length; i++) {
-    const [sku, name, qty, expires, zone] = (rawData[i].split("|")); 
-    result.push({ sku, name, qty, expires, zone })
+    const [sku, name, qty, expires, zone = "general"] = (rawData[i].split("|"));
+    if (!seen.hasOwnProperty(sku)) { 
+      seen[sku] = true;
+      result.push({ sku, name, qty: parseInt(qty), expires, zone})
+    }
   }
 
   return result;
