@@ -18,3 +18,7 @@ function parseShipment(rawData) {
 
   return result;
 }
+
+function planRestock(pantry, shipment) {
+  
+}
