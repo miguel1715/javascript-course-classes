@@ -20,5 +20,9 @@ function parseShipment(rawData) {
 }
 
 function planRestock(pantry, shipment) {
-  
+   const [sku, name, qty, expires, zone = "general"] = (rawData[i].split("|"));
+    if (!seen.hasOwnProperty(sku)) { 
+      seen[sku] = true;
+      result.push({ sku, name, qty: parseInt(qty), expires, zone})
+    }
 }
