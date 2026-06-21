@@ -20,9 +20,20 @@ function parseShipment(rawData) {
 }
 
 function planRestock(pantry, shipment) {
-   const [sku, name, qty, expires, zone = "general"] = (rawData[i].split("|"));
-    if (!seen.hasOwnProperty(sku)) { 
-      seen[sku] = true;
-      result.push({ sku, name, qty: parseInt(qty), expires, zone})
+  const seen = {};
+  const repeated = []; 
+  if (phraseLength >= words.length) {
+    return [];
+  }
+  for (let i = 0; i <= words.length - phraseLength; i++) {
+    const phrase = words.slice(i, i + phraseLength).join(" ");
+    console.log(phrase)
+    if (seen[phrase] !== undefined) {
+      repeated.push(seen[phrase]);
+      repeated.push(i);
+    } else {
+      seen[phrase] = i;
     }
+  }
+  return repeated
 }
