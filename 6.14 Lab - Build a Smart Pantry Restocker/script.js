@@ -20,20 +20,19 @@ function parseShipment(rawData) {
 }
 
 function planRestock(pantry, shipment) {
-  const seen = {};
-  const repeated = []; 
-  if (phraseLength >= words.length) {
-    return [];
+   const parts = rawString.split("|");
+  const trimmedParts = [];
+  for (let i = 0; i < parts.length; i++) {
+    trimmedParts.push(parts[i].trim());
   }
-  for (let i = 0; i <= words.length - phraseLength; i++) {
-    const phrase = words.slice(i, i + phraseLength).join(" ");
-    console.log(phrase)
-    if (seen[phrase] !== undefined) {
-      repeated.push(seen[phrase]);
-      repeated.push(i);
-    } else {
-      seen[phrase] = i;
-    }
-  }
-  return repeated
+  const title = trimmedParts[0];
+  const author = trimmedParts[1];
+  const year = trimmedParts[2];
+  const location = trimmedParts[3];
+  return {
+    title: title || "Unknown",
+    author: author || "Unknown",
+    year: year ? parseInt(year) : "Unknown",
+    location: location || "Unknown"
+  };
 }
