@@ -20,19 +20,40 @@ function parseShipment(rawData) {
 }
 
 function planRestock(pantry, shipment) {
-   const parts = rawString.split("|");
-  const trimmedParts = [];
-  for (let i = 0; i < parts.length; i++) {
-    trimmedParts.push(parts[i].trim());
+  
+}
+
+function validateManifest(manifest) {
+  const errors = {};
+
+  if (!manifest.hasOwnProperty("containerId")) {
+    errors.containerId = "Missing";
+  } else if (typeof manifest.containerId !== "number" || manifest.containerId <= 0 || !Number.isInteger(manifest.containerId)) {
+    errors.containerId = "Invalid";
   }
-  const title = trimmedParts[0];
-  const author = trimmedParts[1];
-  const year = trimmedParts[2];
-  const location = trimmedParts[3];
-  return {
-    title: title || "Unknown",
-    author: author || "Unknown",
-    year: year ? parseInt(year) : "Unknown",
-    location: location || "Unknown"
-  };
+
+  if (!manifest.hasOwnProperty("destination")) {
+    errors.destination = "Missing";
+  } else if (typeof manifest.destination !== "string" || manifest.destination.trim() === "") {
+    errors.destination = "Invalid";
+  }
+
+  if (!manifest.hasOwnProperty("weight")) {
+    errors.weight = "Missing";
+  } else if (typeof manifest.weight !== "number" || manifest.weight <= 0 || Number.isNaN(manifest.weight)) {
+    errors.weight = "Invalid";
+  }
+
+  if (!manifest.hasOwnProperty("unit")) {
+    errors.unit = "Missing";
+  } else if (typeof manifest.unit !== "string" || manifest.unit !== "lb" && manifest.unit !== "kg") {
+    errors.unit = "Invalid";
+  }
+
+  if (!manifest.hasOwnProperty("hazmat")) {
+    errors.hazmat = "Missing";
+  } else if (typeof manifest.hazmat !== "boolean") {
+    errors.hazmat = "Invalid";
+  }
+  return errors
 }
