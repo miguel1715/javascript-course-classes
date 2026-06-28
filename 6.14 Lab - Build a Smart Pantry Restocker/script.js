@@ -20,23 +20,16 @@ function parseShipment(rawData) {
 }
 
 function planRestock(pantry, shipment) {
-  const grouped = {};
-  for (let i = 0; i < catalog.length; i++) {
-    const book = catalog[i];
-    if (book.year === "Unknown") {
-      if (!grouped["Unknown"]) {
-        grouped["Unknown"] = [];
-      }
-      grouped["Unknown"].push(book);
-      continue;
-    }
-    const decade = Math.floor(book.year / 10) * 10;
-    const decadeKey = `${decade}s`;
-    if (!grouped[decadeKey]) {
-      grouped[decadeKey] = [];
-    }
-    grouped[decadeKey].push(book);
+  if (value === "") {
+    delete records[id][prop];
+  } else if (prop !== "tracks" && value !== "") {
+    records[id][prop] = value;
+  } else if (prop === "tracks" && value !== "" && records[id].hasOwnProperty("tracks") === false) {
+    records[id].tracks = [];
+    records[id].tracks.push(value);
+  } else if (prop === "tracks" && value !== "") {
+    records[id].tracks.push(value);
   }
-  return grouped;
+  return records
 }
 
