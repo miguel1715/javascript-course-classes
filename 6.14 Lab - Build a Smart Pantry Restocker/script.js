@@ -20,16 +20,12 @@ function parseShipment(rawData) {
 }
 
 function planRestock(pantry, shipment) {
-  if (value === "") {
-    delete records[id][prop];
-  } else if (prop !== "tracks" && value !== "") {
-    records[id][prop] = value;
-  } else if (prop === "tracks" && value !== "" && records[id].hasOwnProperty("tracks") === false) {
-    records[id].tracks = [];
-    records[id].tracks.push(value);
-  } else if (prop === "tracks" && value !== "") {
-    records[id].tracks.push(value);
-  }
-  return records
+  const currentIndex = gates.indexOf(currentGate);
+  const nextGateIndex = (currentIndex + 1) % gates.length;
+  gates[nextGateIndex].queue[tickIndex] += overflowAmount;
+  console.log(
+    overflowAmount + " attendees rerouted to " +
+    gates[nextGateIndex].id
+  );
 }
 
