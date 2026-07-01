@@ -20,12 +20,29 @@ function parseShipment(rawData) {
 }
 
 function planRestock(pantry, shipment) {
-  const currentIndex = gates.indexOf(currentGate);
-  const nextGateIndex = (currentIndex + 1) % gates.length;
-  gates[nextGateIndex].queue[tickIndex] += overflowAmount;
-  console.log(
-    overflowAmount + " attendees rerouted to " +
-    gates[nextGateIndex].id
-  );
+  
 }
 
+const selectContainer = document.querySelector("select");
+const productsContainer = document.querySelector(".products-container");
+function instrumentCards(instrumentCategory) {
+  const instruments =
+    instrumentCategory === "all"
+      ? instrumentsArr
+      : instrumentsArr.filter(
+          ({ category }) => category === instrumentCategory
+        );
+
+  return instruments
+    .map(({ instrument, price }) => {
+      return `
+          <div class="card">
+            <h2>${instrument}</h2>
+            <p>$${price}</p>
+          </div>
+        `;
+    }).join("")
+}
+selectContainer.addEventListener("change", () => {
+  productsContainer.innerHTML = instrumentCards(selectContainer.value);
+});
