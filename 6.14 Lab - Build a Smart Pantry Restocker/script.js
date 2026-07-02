@@ -20,29 +20,26 @@ function parseShipment(rawData) {
 }
 
 function planRestock(pantry, shipment) {
-  
+  const actions = [];
+
+  for (let i = 0; i < shipment.length; i++) {
+    const item = shipment[i];
+    let found = false;
+
+    for (let j = 0; j < pantry.length; j++) {
+      if (pantry[j].sku === shipment[i].sku) {
+        found = true;
+      }
+    }
+
+  if (item.qty <= 0) {
+    actions.push({type: "discard", item: item});
+  }  else if (found === true) {
+    actions.push({type: "restock", item: item});
+  } else if (found === false) {
+    actions.push({type: "donate", item: item});
+  }
 }
 
-const selectContainer = document.querySelector("select");
-const productsContainer = document.querySelector(".products-container");
-function instrumentCards(instrumentCategory) {
-  const instruments =
-    instrumentCategory === "all"
-      ? instrumentsArr
-      : instrumentsArr.filter(
-          ({ category }) => category === instrumentCategory
-        );
-
-  return instruments
-    .map(({ instrument, price }) => {
-      return `
-          <div class="card">
-            <h2>${instrument}</h2>
-            <p>$${price}</p>
-          </div>
-        `;
-    }).join("")
+  return actions
 }
-selectContainer.addEventListener("change", () => {
-  productsContainer.innerHTML = instrumentCards(selectContainer.value);
-});
