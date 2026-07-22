@@ -1,10 +1,10 @@
 const themes = [
   {
-    name: "Dark",
+    name: "dark",
     message: "Enjoy, Night Owl!"
   },
   {
-    name: "Light",
+    name: "light",
     message: "The Force is strong in the light side!"
   }
 ]
