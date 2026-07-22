@@ -7,8 +7,9 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <p id="status" aria-live="polite">Click the Button below to change scenery!</p>
   <button id="theme-switcher-button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-dropdown">Switch Theme</button>
-  <ul id="theme-dropdown" role= "menu" aria-lebelledby="theme-switcher-button" aria-live="polite" hidden>
+  <ul id="theme-dropdown" role= "menu" aria-labelledby="theme-switcher-button" hidden>
     <li role="menuitem" id="theme-light">Light</li>
     <li role="menuitem" id="theme-dark">Dark</li>
   </ul>
