@@ -5,7 +5,7 @@ const themes = [
   },
   {
     name: "Light",
-    message: "Follow me to the light!"
+    message: "The Force is strong in the light side!"
   }
 ]
 
@@ -18,4 +18,16 @@ buttonGrab.addEventListener("click", () => {
 })
 
 const itemsGrab = document.querySelectorAll('[role="menuitem"]');
+const pGrab = document.getElementById("status");
 
+
+itemsGrab.forEach((x) => {
+    x.addEventListener("click", (e) => {
+      listGrab.hidden = !listGrab.hidden;
+      buttonGrab.setAttribute("aria-expanded", !listGrab.hidden);
+      document.body.className = "";
+      document.body.classList.add(e.target.id);
+      const selectedTheme = themes.find((theme) => theme.name === e.target.textContent);
+      pGrab.textContent = selectedTheme.message;
+  })
+})

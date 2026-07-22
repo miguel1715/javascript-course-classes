@@ -54,3 +54,24 @@ li {
   cursor: pointer
 }
 
+.theme-light {
+  background: #ffffff;
+  color: #000000;
+}
+
+.theme-dark {
+  background: #1a1a2e;
+  color: #ffffff;
+}
+
+.theme-light #theme-dropdown {
+  background: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.theme-dark #theme-dropdown {
+  background: #1a1a2e;
+  color: white;
+  border: 1px solid white;
+}
