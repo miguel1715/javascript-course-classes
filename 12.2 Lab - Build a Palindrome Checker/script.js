@@ -1,11 +1,13 @@
-const textInput = document.getElementById("text-input")
-const checkBtn = document.getElementById("check-btn")
-const result = document.getElementById("result")
+function updateCount(btn) {
+  const countEl = btn.querySelector(".count");
+  let currCount = +countEl.textContent.split("/")[0];
+  
+  if (currCount === 10) return;
+  
+  currCount++;
+  
+  countEl.textContent = `${currCount}/10`;
+}
 
-checkBtn.addEventListener("click", () => {
-  const value = textInput.value
-  if (value = "") {
-    alert("Please input a value")
-  }
-  result.textContent = value + "is a palindrome"
-})
+const btns = document.querySelectorAll(".emoji-btn");
+btns.forEach(btn => btn.addEventListener("click", () => updateCount(btn)));
