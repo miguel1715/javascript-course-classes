@@ -1,45 +1,23 @@
-function isPalindrome(word) {
-  const normalized = word.toLowerCase();
-  const reversed = word.toLowerCase().split("").reverse().join("");
+const textInput = document.getElementById("text-input");
+const checkBtn = document.getElementById("check-btn");
+const result = document.getElementById("result");
 
-  return normalized === reversed;
-}
-
-function findPalindromeBreaks(words) {
-  let breaks = [];
-  for (let i = 0; i < words.length; i++) {
-    if (!isPalindrome(words[i])) {
-      breaks.push(i)
+checkBtn.addEventListener("click", () => {
+    if (textInput.value === "") {
+        alert("Please input a value")
+        return
     }
-  }
-  return breaks
-}
+    const cleaned = textInput.value.replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+    const reversed = cleaned.split("").reverse().join("");
 
-function findRepeatedPhrases(words, phraseLength) {
-  const seen = {};
-  const repeated = []; 
-  if (phraseLength >= words.length) {
-    return [];
-  }
-  for (let i = 0; i <= words.length - phraseLength; i++) {
-    const phrase = words.slice(i, i + phraseLength).join(" ");
-    console.log(phrase)
-    if (seen[phrase] !== undefined) {
-      repeated.push(seen[phrase]);
-      repeated.push(i);
+    if (cleaned === reversed) {
+        result.textContent = `${textInput.value} is a palindrome`
+        result.className = "";
+        result.classList.add("palindrome");
     } else {
-      seen[phrase] = i;
+        result.textContent = `${textInput.value} is not a palindrome`
+        result.className = "";
+        result.classList.add("not-palindrome");
     }
-  }
-  return repeated
-}
-
-function analyzeTexts(texts, phraseLength) {
-  if ( texts.length === 0) {
-    return [];
-  }
-  return texts.map((text) => ({
-  repeatedPhrases: findRepeatedPhrases(text, phraseLength),
-  palindromeBreaks: findPalindromeBreaks(text)
-  }));
-}
+    return
+})
