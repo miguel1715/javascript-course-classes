@@ -5,43 +5,13 @@ const testResult = document.getElementById("result");
 const caseInsensitiveFlag = document.getElementById("i");
 const globalFlag = document.getElementById("g");
 
-const rawCatalogCards = [
-  "From a Buick 8 | King, Stephen | 2002 | Shelf K7",
-  "The Shining | King, Stephen | 1977 | Shelf K1",
-  "The Stand | King, Stephen | 1978 | Shelf K2",
-  "It | King, Stephen | 1986 | Shelf K3",
-  "Misery | King, Stephen | 1987 | Shelf K4",
-  "Do Androids Dream of Electric Sheep? | Dick, Philip K. | 1968 | Shelf D5",
-  "I, Robot | Asimov, Isaac | 1950 | Shelf A8",
-  "Foundation | Asimov, Isaac | 1951 | Shelf A9",
-  "Dune | Herbert, Frank | 1965 | Shelf H3",
-  "Neuromancer | Gibson, William | 1984 | Shelf G8",
-  "Snow Crash | Stephenson, Neal | 1992 | Shelf S6",
-  "The Martian | Weir, Andy | 2011 | Shelf W5",
-  "Ender's Game | Card, Orson Scott | 1985 | Shelf C2",
-  "The Hitchhiker's Guide to the Galaxy | Adams, Douglas | 1979 | Shelf A1",
-  "Ready Player One | Cline, Ernest | 2011 | Shelf C7",
-  "The Dark Tower: The Gunslinger | King, Stephen | 1982 | Shelf K5",
-  // edge cases: missing data
-  "Unknown Title |  | 1975 | Shelf X1",
-  "Mysterious Manuscript | Unknown Author |  | Shelf Z9",
-  "Ancient Scroll | Anonymous | 850 | ",
-];
 
-function parseCard(rawString) {
-  const parts = rawString.split("|");
-  const trimmedParts = [];
-  for (let i = 0; i < parts.length; i++) {
-    trimmedParts.push(parts[i].trim());
-  }
-  const title = trimmedParts[0];
-  const author = trimmedParts[1];
-  const year = trimmedParts[2];
-  const location = trimmedParts[3];
-  return {
-    title: title || "Unknown",
-    author: author || "Unknown",
-    year: year ? parseInt(year) : "Unknown",
-    location: location || "Unknown"
-  };
+function diffArray(arr1, arr2) {
+  
+  const filteredArr1 = arr1.filter((elem) => arr2.includes(elem) === false);
+  const filteredArr2 = arr2.filter((elem) => arr1.includes(elem) === false);
+  const finalArr = filteredArr1.concat(filteredArr2);
+
+  return finalArr;
+
 }
