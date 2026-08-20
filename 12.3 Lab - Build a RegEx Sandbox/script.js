@@ -6,15 +6,30 @@ const caseInsensitiveFlag = document.getElementById("i");
 const globalFlag = document.getElementById("g");
 
 function getFlags() {
-     let result = 0;
-  if (n > m) {
-    for (let i = n; i >= m; i--) {
-      result += i;
+    let flags = "";
+
+    if (caseInsensitiveFlag.checked) {
+        flags += "i";
+    } if (globalFlag.checked) {
+        flags += "g";
     }
-  } else {
-    for (let i = n; i <= m; i++){
-      result += i;
-    }
-  }
-  return result;
+    return flags;
 }
+
+testButton.addEventListener("click", () => {
+    const pattern = regexPattern.value;
+    const flagInput = getFlags();
+    const customRegex = new RegExp(pattern, flagInput);
+
+    const originalString = stringToTest.textContent;
+    const highlighted = originalString.replace(customRegex, "<span class='highlight'>$&</span>");
+    stringToTest.innerHTML = highlighted;
+
+    const matches = originalString.match(customRegex);
+
+    if (matches) {
+        testResult.textContent = matches.join(", ");
+    } else {
+        testResult.textContent = "no match";
+    }
+});
