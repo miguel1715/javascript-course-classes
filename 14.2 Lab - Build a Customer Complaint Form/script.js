@@ -4,12 +4,14 @@ const getOrderNo = document.getElementById("order-no");
 const getProductCode = document.getElementById("product-code");
 const getQuantity = document.getElementById("quantity");
 
-const getComplaintsGroup = document.querySelectorAll('#complaints-group input[type="checkbox"]');
+const getComplaintsGroup = Array.from(document.querySelectorAll('#complaints-group input[type="checkbox"]'));
+const getFieldset = document.getElementById("complaints-group");
 const getOtherCheckbox = document.getElementById("other-complaint");
 const getComplaintDescription = document.getElementById("complaint-description-container");
 const getComplaintText = document.getElementById("complaint-description");
 
-const getSolutionsGroup = document.querySelectorAll('#solutions-group input[type="radio"]');
+const getSolutionsGroup = Array.from(document.querySelectorAll('#solutions-group input[type="radio"]'));
+const getSolutionsFieldset = document.getElementById("solutions-group");
 const getOtherRadio = document.getElementById("other-solution");
 const getSolutionText = document.getElementById("solution-description");
 
@@ -36,3 +38,75 @@ getFullName.addEventListener("change", () => {
     const validation = validateForm();
     getFullName.style.borderColor = validation["full-name"] ? "green" : "red";
 });
+
+getEmail.addEventListener("change", () => {
+    const validation = validateForm();
+    getEmail.style.borderColor = validation["email"] ? "green" : "red";
+})
+
+getOrderNo.addEventListener("change", () => {
+    const validation = validateForm();
+    getOrderNo.style.borderColor = validation["order-no"] ? "green" : "red";
+})
+
+getProductCode.addEventListener("change", () => {
+    const validation = validateForm();
+    getProductCode.style.borderColor = validation["product-code"] ? "green" : "red";
+})
+
+getQuantity.addEventListener("change", () => {
+    const validation = validateForm();
+    getQuantity.style.borderColor = validation["quantity"] ? "green" : "red";
+})
+
+getFieldset.addEventListener("change", () => {
+    const validation = validateForm();
+    getFieldset.style.borderColor = validation["complaints-group"] ? "green" : "red";
+})
+
+getComplaintText.addEventListener("change", () => {
+    const validation = validateForm();
+    getComplaintText.style.borderColor = validation["complaint-description"] ? "green" : "red";
+})
+
+getSolutionsFieldset.addEventListener("change", () => {
+    const validation = validateForm();
+    getSolutionsFieldset.style.borderColor = validation["solutions-group"] ? "green" : "red";
+})
+
+getSolutionText.addEventListener("change", () => {
+    const validation = validateForm();
+    getSolutionText.style.borderColor = validation["solution-description"] ? "green" : "red";
+})
+
+
+const form = document.getElementById("form");
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const fieldElements = {
+        "full-name": getFullName,
+        "email": getEmail,
+        "order-no": getOrderNo,
+        "product-code": getProductCode,
+        "quantity": getQuantity,
+        "complaints-group": getFieldset,
+        "complaint-description": getComplaintText,
+        "solutions-group": getSolutionsFieldset,
+        "solution-description": getSolutionText
+    };
+
+    const validation = validateForm();
+    const getMessage = document.getElementById("message-box");
+
+    
+    Object.keys(fieldElements).forEach((key) => {
+        fieldElements[key].style.borderColor = validation[key] ? "green" : "red";
+    })
+    
+    if (isValid(validation)) {
+        getMessage.style.color = "green"
+        getMessage.textContent = "Congratulations and thank you for your submission!"
+    }
+})
