@@ -79,20 +79,113 @@ function normalizeDirectory(rawData) {
       name: departmentName,
       programIds: [],
     };
-      
-    for (let j = 0; j < departmentData.programs.length; j++) {
 
+    for (let j = 0; j < departmentData.programs.length; j++) {
       const program = departmentData.programs[j];
-      
+
       programsById[program.id] = {
-        ...program, departmentId
-      }
+        ...program,
+        departmentId,
+      };
 
       departmentsById[departmentId].programIds.push(program.id);
+      for (let k = 0; k < program.instructors.length; k++) {
+        const instructor = program.instructors[k];
+
+        instructorsById[instructor.id] = {
+          ...instructor,
+          programId: program.id,
+          departmentId,
+        };
+
+        if (instructor.email) {
+          instructorsByEmail[instructor.email] = instructor.id;
+        }
+      }
     }
-    
-    console.log(departmentsById[departmentId]);
   }
+
+  return {
+    departmentsById,
+    programsById,
+    instructorsById,
+    instructorsByEmail,
+  };
 }
 
-normalizeDirectory(rawData);
+const normalizedData = normalizeDirectory(rawData);
+
+
+function getInstructorByEmail(email, normalizedData) {
+  const instructorId = normalizedData.instructorsByEmail[email];
+
+  if (!instructorId) {
+    return "Instructor not found";
+  }
+
+  const instructor = normalizedData.instructorsById[instructorId];
+  const department = normalizedData.departmentsById[instructor.departmentId];
+
+  return {
+    name: instructor.name ?? "Unknown Instructor",
+    officeHours: instructor.officeHours ?? "Not Available",
+    department: department.name ?? "Unknown Department",
+  };
+}
+
+
+function listRoomsByBuilding(buildingCode, normalizedData) {
+
+  const programValues = Object.values(normalizedData.programsById);
+  const rooms = [];
+
+  for (let i = 0; i < programValues.length; i++) {
+    const program = programValues[i];
+    const department = normalizedData.departmentsById[program.departmentId];
+
+    if (department.code === buildingCode && program.room != null) {
+      rooms.push(program.room);
+    }
+  }
+
+  rooms.sort();
+  return rooms;
+}
+
+
+function renderDirectorySummary(normalizedData) {
+  const departments = Object.keys(normalizedData.departmentsById).length;
+  const programs = Object.keys(normalizedData.programsById).length;
+  const instructors = Object.keys(normalizedData.instructorsById).length;
+
+  const instructorValues = Object.values(normalizedData.instructorsById);
+  let missingOfficeHours = 0;
+
+  for (let i = 0; i < instructorValues.length; i++) {
+    if (instructorValues[i].officeHours == null) {
+      missingOfficeHours++;
+    }
+  }
+
+  const programValues = Object.values(normalizedData.programsById);
+  let programsWithoutRooms = 0;
+
+  for (let i = 0; i < programValues.length; i++) {
+    if ( programValues[i].room === null) {
+      programsWithoutRooms++;
+    }    
+  }
+
+return `
+Campus Directory Summary
+------------------------
+Departments: ${departments}
+Programs: ${programs}
+Instructors: ${instructors}
+Missing Office Hours: ${missingOfficeHours}
+Programs Without Rooms: ${programsWithoutRooms}
+`
+}
+
+
+console.log(renderDirectorySummary(normalizedData))
